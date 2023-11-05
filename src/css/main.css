@@ -207,6 +207,11 @@ a:hover{
       gap: 1rem;
   }
 
+  .btn-color-1 a:hover{
+    text-decoration: none;
+    color: #fff;
+  }
+
   .btn {
     font-weight: 600;
     transition: all 300ms ease;

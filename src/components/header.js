@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import React from 'react'
-import { Element } from 'react-scroll'
+import { Element, Link } from 'react-scroll'
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import GitHubIcon from '@mui/icons-material/GitHub';
 
@@ -17,8 +17,11 @@ export default function Header() {
                     <p className="section__text__p2">Web Developer</p>
 
                     <div className="btn-container">
-                        <button className="btn btn-color-2">Download CV</button>
-                        <button className="btn btn-color-1">Contact me</button>
+                        <button className="btn btn-color-2" onClick={() => window.open('/pdf/PratikPatil_resumenew.pdf')}>Download CV</button>
+                        <button className="btn btn-color-1"><Link to="contact_us" spy={true}
+                            smooth={true}
+                            offset={-100}
+                            duration={500}> Contact me</Link></button>
                     </div>
                     <div id="socials-container">
                         <LinkedInIcon className="icon" />

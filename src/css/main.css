@@ -94,6 +94,13 @@ a:hover{
     text-decoration: none;
     transition: all 0.3 ease-in-out;
   }
+
+  .menu-links .active{
+    color: gray;
+    text-decoration: underline;
+    text-underline-offset: 1rem;
+    text-decoration-color: gray;
+  }
   
   .menu-links li {
     list-style: none;

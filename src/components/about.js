@@ -29,8 +29,8 @@ export default function About() {
             </div>
           </div>
           <div className="section__pic-container-about">
-            {skills.map((ele) => (
-              <Box sx={{ flexGrow: 1, marginBlock: "2rem" }}>
+            {skills.map((ele, index) => (
+              <Box key={index} sx={{ flexGrow: 1, marginBlock: "2rem" }}>
                 <h4>{ele.label}</h4>
                 <Progress value={ele.value}></Progress>
               </Box>

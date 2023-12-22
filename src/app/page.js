@@ -10,7 +10,9 @@ import Project from '@/components/project';
 import { useEffect } from 'react';
 import { Events, scrollSpy } from 'react-scroll';
 import './../css/main.css'
-import './../css/mediaQueries.css'
+import './../css/mediaQueries.css';
+import { Provider } from 'react-redux';
+import { store } from '@/redux/store';
 
 export default function Home() {
   useEffect(() => {
@@ -36,13 +38,15 @@ export default function Home() {
   }, []);
   return (
     <>
-      <Navbar />
-      <Header />
-      <About />
-      <Experience />
-      <Project />
-      <Contact />
-      <Footer />
+      <Provider store={store}>
+        <Navbar />
+        <Header />
+        <About />
+        <Experience />
+        <Project />
+        <Contact />
+        <Footer />
+      </Provider>
     </>
   )
 }

@@ -1,10 +1,18 @@
 import Image from 'next/image'
-import React from 'react'
+import React, { memo, useEffect } from 'react'
 import { Element, Link } from 'react-scroll'
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import GitHubIcon from '@mui/icons-material/GitHub';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchHeading } from '@/redux/slice/data';
 
-export default function Header() {
+
+function Header() {
+    const dispatch = useDispatch()
+    const { greeting, loading, isError } = useSelector(state => state.data)
+    useEffect(() => {
+        dispatch(fetchHeading())
+    }, [])
     return (
         <Element name="heading" className="element">
             <section id="profile">
@@ -32,3 +40,5 @@ export default function Header() {
         </Element>
     )
 }
+
+export default memo(Header)

@@ -1,7 +1,26 @@
 
 
-@media screen and (max-width:1200px) {
-    #desktop-nav{
+
+/* 2xl */
+@media (max-width: 1536px) {
+  .mycontainer {
+    max-width: 1280px;
+  }
+}
+
+/* xl */
+@media (max-width: 1280px) {
+  .mycontainer {
+    max-width: 1024px;
+  }
+}
+
+/* lg */
+@media (max-width: 1024px) {
+  .mycontainer {
+    max-width: 768px;
+  }
+  #desktop-nav{
         display: none;
     }
     #hamburger-nav{
@@ -10,74 +29,48 @@
     .arrow{
         display: none;
     }
-    
-}
-@media screen and (max-width:820px){
-    #about, #experience, #project{
-        margin-top: 2rem;
-        height: fit-content;
-    }
-    section{
-        height: 60vh;
-    }
-    #about .section-container{
-        flex-direction: column;
-    }
-    .experience-container {
-    grid-template-columns: 1fr;
-    grid-gap: 2rem;
-}
-.section__pic-container-about {
-        width:70vw;
-    }
 }
 
-@media (min-width:320px)  { 
-    /* smartphones, iPhone, portrait 480x320 phones */ 
+/* md */
+@media (max-width: 768px) {
+  .mycontainer {
+    max-width: 640px;
+  }
+  .header-container{
+      flex-direction: column;
+      gap: 3rem;
+  }
+  .about-content{
+      flex-direction: column;
+      gap: 3rem;
+  }
+  .about-img{
+    width: 60%;
+  }
+  .about-description{
+      width: 100%;
+  }
+  .about-description-detail{
+      justify-content: center;
+  }
 }
-@media (max-width:481px)  { 
-    /* portrait e-readers (Nook/Kindle), smaller tablets @ 600 or @ 640 wide. */ 
-    .contatct-info-upper-container{
-        flex-direction: column;
-        margin: 2rem 0;
-    }
-    
-}
-@media (max-width:641px)  { 
-    /* portrait tablets, portrait iPad, landscape e-readers, landscape 800x480 or 854x480 phones */ 
-    section{
-        margin: 0 2rem;
-    }
-    #profile{
-        flex-direction: column;
-    }
-    #about, #experience, #project{
-        margin-top: 2rem;
-        height: fit-content;
-    }
-    #profile .section__pic-container {
-            height: 100px;
-            text-align: center;
-            width: 100vw;
-            align-self: center;
 
-    }
-    .section__pic-container-about {
-        width: 88vw;
-    }
-
-    #about .section-container{
-        flex-direction: column;
-    }
-
-    .experience-container {
-    grid-template-columns: 1fr;
-    grid-gap: 2rem;
+/* sm */
+@media (max-width: 640px) {
+  .mycontainer {
+    max-width: 475px;
+  }
+  
 }
+
+/* xs */
+@media (max-width: 475px) {
+  .mycontainer {
+    width: 100%;
+  }
+  .about-description{
+      width: 70%;
+  }
+  
 }
-@media (max-width:961px)  { /* tablet, landscape iPad, lo-res laptops ands desktops */ }
-@media (min-width:1025px) { 
-    /* big landscape tablets, laptops, and desktops */
- }
-@media (min-width:1281px) { /* hi-res laptops and desktops */ }
 

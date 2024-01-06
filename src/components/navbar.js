@@ -17,6 +17,7 @@ export default function Navbar() {
     }
     return (
         <>
+            {/* <div className="mycontainer"> */}
             <nav id="desktop-nav">
                 <div className="logo">Pratik Patil</div>
                 <ul className="nav-links">
@@ -55,6 +56,7 @@ export default function Navbar() {
 
 
             </nav>
+            {/* </div> */}
         </>
     )
 }

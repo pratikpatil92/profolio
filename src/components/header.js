@@ -3,37 +3,36 @@ import React, { memo, useEffect } from 'react'
 import { Element, Link } from 'react-scroll'
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import GitHubIcon from '@mui/icons-material/GitHub';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchHeading } from '@/redux/slice/data';
+import { useSelector } from 'react-redux';
+import { Skeleton } from '@mui/material';
 
 
 function Header() {
-    const dispatch = useDispatch()
-    const { greeting, loading, isError } = useSelector(state => state.data)
-    useEffect(() => {
-        dispatch(fetchHeading())
-    }, [])
+    const { greeting, loadingGreeting } = useSelector(state => state?.data)
+
     return (
         <Element name="heading" className="element">
             <section id="profile">
-                <div className="section__pic-container">
-                    <Image src="/img/profile_pic.png" width={300} height={300} alt="pratik patil profile pic"></Image>
-                </div>
-                <div className="section__text">
-                    <p className="section__text__p1">Hello I'm</p>
-                    <h1 className="title">Pratik Patil</h1>
-                    <p className="section__text__p2">Web Developer</p>
-
-                    <div className="btn-container">
-                        <button className="btn btn-color-2" onClick={() => window.open('/pdf/PratikPatil_resumenew.pdf')}>Download CV</button>
-                        <button className="btn btn-color-1"><Link to="contact_us" spy={true}
-                            smooth={true}
-                            offset={-100}
-                            duration={500}> Contact me</Link></button>
+                <div className="mycontainer header-container">
+                    <div className="section__pic-container">
+                        {loadingGreeting ? <Skeleton variant="circular" width={300} height={300} /> : <img src={greeting?.profileImg} width={300} height={300} alt="pratik patil profile pic"></img>}
                     </div>
-                    <div id="socials-container">
-                        <LinkedInIcon className="icon" />
-                        <GitHubIcon className="icon" />
+                    <div className="section__text">
+                        {loadingGreeting ? <Skeleton /> : <p className="section__text__p1">{greeting?.greetings}</p>}
+                        {loadingGreeting ? <Skeleton /> : <h1 className="title">{greeting?.name}</h1>}
+                        {loadingGreeting ? <Skeleton /> : <p className="section__text__p2">{greeting?.position}</p>}
+
+                        <div className="btn-container">
+                            {loadingGreeting ? <Skeleton variant='rectangular' /> : <button className="btn btn-color-2" onClick={() => window.open('/pdf/PratikPatil_resumenew.pdf')}>Download CV</button>}
+                            {loadingGreeting ? <Skeleton variant='rectangular' /> : <button className="btn btn-color-1"><Link to="contact_us" spy={true}
+                                smooth={true}
+                                offset={-100}
+                                duration={500}> Contact me</Link></button>}
+                        </div>
+                        <div id="socials-container">
+                            {loadingGreeting ? <Skeleton variant='circular' /> : <LinkedInIcon className="icon" />}
+                            {loadingGreeting ? <Skeleton variant='circular' /> : <GitHubIcon className="icon" />}
+                        </div>
                     </div>
                 </div>
             </section>

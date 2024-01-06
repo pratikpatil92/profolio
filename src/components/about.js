@@ -1,46 +1,44 @@
-import React from 'react'
+import { Skeleton } from '@mui/material';
+import React, { memo } from 'react'
+import { useSelector } from 'react-redux';
 import { Element, Link } from 'react-scroll'
 
-import { Box } from '@mui/system';
-import Progress from './reusable/progress';
 import DownArrow from './reusable/downArrow';
 
 
-export default function About() {
-  const skills = [
-    { label: "React js", value: 80 },
-    { label: "Next Js", value: 80 },
-    { label: "HTML", value: 75 },
-    { label: "CSS", value: 70 },
-    { label: "Node js", value: 60 },
-  ]
+function About() {
+  const { aboutMe, aboutMeLoading } = useSelector(state => state?.data)
   return (
     <Element name="about" className="element">
 
       <section id="about">
-        <p className="section__text__p1">Get To Know More</p>
-        <h1 className="title">About Me</h1>
-        <div className="section-container">
-          <div className="about-details-container">
-            <div className="text-container">
-              <p>
-                "I'm a highly skilled ReactJS developer with 4 years of experience and a Bachelor of Engineering degree from Mumbai University. I specialize in crafting top-notch web applications, focusing on dynamic, responsive user interfaces, state management, and component-based architecture. My strong problem-solving skills and commitment to clean, maintainable code make me a valuable asset for any web development project. I stay updated with the latest industry trends to ensure solutions align with business objectives and user expectations."
-              </p>
+        <div className="mycontainer about-section">
+          <p className="section__text__p1">Get To Know More</p>
+          <h1 className="title">About Me</h1>
+          <div className="about-content">
+            <div className="about-img">
+              {aboutMeLoading ? <Skeleton variant="rectagular" /> : <img src={aboutMe?.aboutMeImg} alt="about-me" />}
+            </div>
+            <div className="about-description">
+              {aboutMeLoading ? <Skeleton variant="rectagular" /> : <p>{aboutMe?.Description}</p>}
+              <div className="about-description-detail">
+                {aboutMeLoading ? <Skeleton variant="rectagular" /> : <div className="detail-experience">
+                  <p>{aboutMe?.yearOfExperience}+</p>
+                  <p>Year of Experience</p>
+                </div>}
+                {aboutMeLoading ? <Skeleton variant="rectagular" /> : <div className="detail-experience">
+                  <p>{aboutMe?.numberOfProject}+</p>
+                  <p>Completed Project</p>
+                </div>}
+
+              </div>
             </div>
           </div>
-          <div className="section__pic-container-about">
-            {skills.map((ele, index) => (
-              <Box key={index} sx={{ flexGrow: 1, marginBlock: "2rem" }}>
-                <h4>{ele.label}</h4>
-                <Progress value={ele.value}></Progress>
-              </Box>
-            ))}
-          </div>
-
         </div>
-        <DownArrow to='experience' />
       </section>
 
     </Element>
   )
 }
+
+export default memo(About)

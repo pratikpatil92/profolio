@@ -11,11 +11,16 @@ import { useEffect } from 'react';
 import { Events, scrollSpy } from 'react-scroll';
 import './../css/main.css'
 import './../css/mediaQueries.css';
-import { Provider } from 'react-redux';
+import { Provider, useDispatch } from 'react-redux';
 import { store } from '@/redux/store';
+import { fetchAboutMe, fetchHeading } from '@/redux/slice/data';
 
 export default function Home() {
+  const dispatch = useDispatch()
   useEffect(() => {
+    //fetch data
+    dispatch(fetchHeading())
+    dispatch(fetchAboutMe())
 
     // Registering the 'begin' event and logging it to the console when triggered.
     Events.scrollEvent.register('begin', (to, element) => {
@@ -29,7 +34,6 @@ export default function Home() {
 
     // Updating scrollSpy when the component mounts.
     scrollSpy.update();
-
     // Returning a cleanup function to remove the registered events when the component unmounts.
     return () => {
       Events.scrollEvent.remove('begin');
@@ -43,9 +47,9 @@ export default function Home() {
         <Header />
         <About />
         <Experience />
-        <Project />
-        <Contact />
-        <Footer />
+        {/* <Project /> */}
+        {/* <Contact /> */}
+        {/* <Footer /> */}
       </Provider>
     </>
   )

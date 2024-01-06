@@ -1,41 +1,68 @@
-import { getData } from "@/services";
+import { baseUrl, getData } from "@/services";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
-export const fetchHeading = createAsyncThunk('fetchHeading', async () => {
+export const fetchHeading = createAsyncThunk('fetchHeading', async (arg, { dispatch }) => {
     try {
-        const result = await getData('/greeting');
+        dispatch(setGreetingsLoading(true))
+        let result = await getData('/api/greeting?populate=*');
+        result = result?.data?.attributes
+        result = {
+            ...result,
+            profileImg: `${baseUrl}${result?.pic?.data?.attributes?.url}`
+        }
+        dispatch(setGreetings(result))
+        dispatch(setGreetingsLoading(false))
         return result
     } catch (error) {
+        dispatch(setGreetingsLoading(false))
         return error
     }
 })
 
+export const fetchAboutMe = createAsyncThunk('fetchAboutMe', async (arg, { dispatch }) => {
+    try {
+        dispatch(setAboutMeLoading(true))
+        let result = await getData('/api/about?populate=*');
+        result = result?.data?.attributes
+        result = {
+            ...result,
+            aboutMeImg: `${baseUrl}${result?.aboutMePic?.data?.attributes?.url}`
+        }
+        dispatch(setAboutMe(result))
+        dispatch(setAboutMeLoading(false))
+        return result
+    } catch (error) {
+        dispatch(setAboutMeLoading(false))
+        return error
+    }
+})
+
+
+
 const dataSlice = createSlice({
     name: 'data',
     initialState: {
-        greeting: [],
-        loading: false,
-        isError: false
+        greeting: {},
+        loadingGreeting: true,
+        aboutMe: {},
+        aboutMeLoading: true,
     },
-    extraReducers: (builder) => {
-        builder.addCase(fetchHeading.pending, (state, action) => {
-            state.greeting = [];
-            state.loading = true;
-            state.isError = false
-        })
-        builder.addCase(fetchHeading.fulfilled, (state, action) => {
-            state.greeting = action.payload;
-            state.loading = false;
-            state.isError = false
-        })
-        builder.addCase(fetchHeading.rejected, (state, action) => {
-            state.greeting = action.payload;
-            state.loading = false;
-            state.isError = true
-        })
-
-
+    reducers: {
+        setGreetings: (state, action) => {
+            state.greeting = action.payload
+        },
+        setGreetingsLoading: (state, action) => {
+            state.loadingGreeting = action.payload
+        },
+        setAboutMe: (state, action) => {
+            state.aboutMe = action.payload
+        },
+        setAboutMeLoading: (state, action) => {
+            state.aboutMeLoading = action.payload
+        },
     }
 })
+
+export const { setGreetings, setGreetingsLoading, setAboutMe, setAboutMeLoading } = dataSlice.actions
 
 export default dataSlice.reducer

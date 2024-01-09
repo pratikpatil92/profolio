@@ -37,6 +37,48 @@ export const fetchAboutMe = createAsyncThunk('fetchAboutMe', async (arg, { dispa
     }
 })
 
+export const fetchExprience = createAsyncThunk('fetchExprience', async (arg, { dispatch }) => {
+    try {
+        dispatch(setExprienceLoading(true))
+        let result = await getData('/api/experiences?populate=*');
+
+        result = result?.data.map((ele, index) => {
+            ele.attributes = {
+                ...ele.attributes,
+                technologies: ele?.attributes?.description?.split(',')
+            }
+            return ele
+        })
+        result = result.sort((a, b) => a.id - b.id)
+        dispatch(setExprienceData(result))
+        dispatch(setExprienceLoading(false))
+        return result
+    } catch (error) {
+        dispatch(setExprienceLoading(false))
+        return error
+    }
+})
+export const fetchProject = createAsyncThunk('fetchProject', async (arg, { dispatch }) => {
+    try {
+        dispatch(setProjectLoading(true))
+        let result = await getData('/api/projects?populate=*');
+        result = result?.data.map((ele, index) => {
+            ele.attributes = {
+                ...ele.attributes,
+                _technologies: ele?.attributes?.technologies?.split(','),
+                _description: ele?.attributes?.description?.split('.,'),
+            }
+            return ele
+        })
+        result = result.sort((a, b) => a.id - b.id)
+        dispatch(setProjectData(result))
+        dispatch(setProjectLoading(false))
+        return result
+    } catch (error) {
+        dispatch(setProjectLoading(false))
+        return error
+    }
+})
 
 
 const dataSlice = createSlice({
@@ -46,6 +88,10 @@ const dataSlice = createSlice({
         loadingGreeting: true,
         aboutMe: {},
         aboutMeLoading: true,
+        exprienceData: [],
+        exprienceLoading: true,
+        projectData: [],
+        projectLoading: true
     },
     reducers: {
         setGreetings: (state, action) => {
@@ -60,9 +106,24 @@ const dataSlice = createSlice({
         setAboutMeLoading: (state, action) => {
             state.aboutMeLoading = action.payload
         },
+        setExprienceData: (state, action) => {
+            state.exprienceData = action.payload
+        },
+        setExprienceLoading: (state, action) => {
+            state.exprienceLoading = action.payload
+        },
+        setProjectData: (state, action) => {
+            state.projectData = action.payload
+        },
+        setProjectLoading: (state, action) => {
+            state.projectLoading = action.payload
+        },
     }
 })
 
-export const { setGreetings, setGreetingsLoading, setAboutMe, setAboutMeLoading } = dataSlice.actions
+export const {
+    setGreetings, setGreetingsLoading, setAboutMe, setAboutMeLoading, setExprienceData,
+    setExprienceLoading, setProjectData, setProjectLoading
+} = dataSlice.actions
 
 export default dataSlice.reducer

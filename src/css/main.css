@@ -155,7 +155,7 @@ a:hover{
       flex-direction: row;
       gap: 8rem;
       justify-content: center;
-      margin-top: 8rem;
+      margin-top: 12rem;
       align-items: center;
       width: 100%;
   }
@@ -262,7 +262,7 @@ a:hover{
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  margin-top: 2rem;
+  margin-top: .5rem;
 }
 
 .about-img{
@@ -272,7 +272,7 @@ a:hover{
 
 .about-img img{
   width: 100%;
-  height: 20%;
+  height: 500px;
 
 }
 
@@ -307,15 +307,37 @@ a:hover{
 
 /* Section Project */
 
-#project{
-  position: relative;
+.project-section{
+  margin-top: 12%;
 }
 
 .project-container{
   display: flex;
-  justify-content: center;
-  margin-block: 2rem;
+  flex-direction: column;
+  gap: 2rem;
+  margin-top: 2rem;
 }
+
+.project-card{
+   border: 1px solid #ddd;
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease-in-out;
+  padding: 2rem;
+}
+
+.project-card:hover {
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+        }
+
+.project-card h2{
+  margin-block: 1rem ;
+} 
+.project-card h4{
+  margin-top: 1rem ;
+  margin-bottom: .5rem ;
+}       
 
 /* Section contact */
 #contact{

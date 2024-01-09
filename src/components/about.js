@@ -17,10 +17,10 @@ function About() {
           <h1 className="title">About Me</h1>
           <div className="about-content">
             <div className="about-img">
-              {aboutMeLoading ? <Skeleton variant="rectagular" /> : <img src={aboutMe?.aboutMeImg} alt="about-me" />}
+              {aboutMeLoading ? <Skeleton variant="rectagular" width={500} height={500} /> : <img src={aboutMe?.aboutMeImg} alt="about-me" />}
             </div>
             <div className="about-description">
-              {aboutMeLoading ? <Skeleton variant="rectagular" /> : <p>{aboutMe?.Description}</p>}
+              {aboutMeLoading ? <Skeleton variant="rectagular" height={200} /> : <p>{aboutMe?.Description}</p>}
               <div className="about-description-detail">
                 {aboutMeLoading ? <Skeleton variant="rectagular" /> : <div className="detail-experience">
                   <p>{aboutMe?.yearOfExperience}+</p>

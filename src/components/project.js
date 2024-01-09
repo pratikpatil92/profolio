@@ -1,21 +1,48 @@
-import React from 'react'
+import { Chip } from '@mui/material'
+import React, { memo } from 'react'
+import { useSelector } from 'react-redux'
 import { Element } from 'react-scroll'
 import DownArrow from './reusable/downArrow'
 
-export default function Project() {
+function Project() {
+    const { projectData, projectLoading } = useSelector(state => state?.data)
+
     return (
         <Element name="project" className="element">
             <section id="project">
-                <p className="section__text__p1">Browse my recent</p>
-                <h1 className="title">Projects</h1>
-                <div className="project-container">
+                <div className="mycontainer project-section">
+                    <p className="section__text__p1">Browse my recent</p>
+                    <h1 className="title">Projects</h1>
                     <p><b>Important Note:</b> Please be aware that I have worked on several projects for my current company, which are confidential and cannot be shared on this public portfolio website.
-                        However, you can download my resume or visit Linkedin for detailed information about these projects, including my role, contributions, and the technologies used.
-                        Feel free to contact me if you have any questions or would like to discuss these projects further.
                     </p>
+                    <div className="project-container">
+                        {projectData?.map((ele, index) => {
+                            const { attributes } = ele
+                            return (
+                                <div key={index} className="project-card">
+                                    <h2>{attributes.name}</h2>
+                                    <ul>
+                                        {attributes._description.map((de, id) => (
+                                            <li key={id}>
+                                                {de}
+                                            </li>
+                                        ))}
+                                    </ul>
+                                    <h4>Technologies:</h4>
+                                    <div>
+                                        {attributes?._technologies?.map((tech, idt) => (
+                                            <Chip style={{ marginLeft: ".5rem", marginBottom: ".5rem" }} key={idt} label={tech} />
+                                        ))}
+                                    </div>
+                                </div>
+                            )
+                        })}
+
+                    </div>
                 </div>
-                <DownArrow to="contact_us" />
             </section>
         </Element>
     )
 }
+
+export default memo(Project)

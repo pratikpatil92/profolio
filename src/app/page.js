@@ -7,13 +7,13 @@ import Footer from '@/components/footer';
 import Header from '@/components/header';
 import Navbar from '@/components/navbar';
 import Project from '@/components/project';
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 import { Events, scrollSpy } from 'react-scroll';
 import './../css/main.css'
 import './../css/mediaQueries.css';
 import { Provider, useDispatch } from 'react-redux';
 import { store } from '@/redux/store';
-import { fetchAboutMe, fetchHeading } from '@/redux/slice/data';
+import { fetchAboutMe, fetchExprience, fetchHeading, fetchProject } from '@/redux/slice/data';
 
 export default function Home() {
   const dispatch = useDispatch()
@@ -21,6 +21,7 @@ export default function Home() {
     //fetch data
     dispatch(fetchHeading())
     dispatch(fetchAboutMe())
+    dispatch(fetchExprience())
 
     // Registering the 'begin' event and logging it to the console when triggered.
     Events.scrollEvent.register('begin', (to, element) => {
@@ -40,6 +41,11 @@ export default function Home() {
       Events.scrollEvent.remove('end');
     };
   }, []);
+
+  useMemo(() => {
+    dispatch(fetchProject())
+
+  }, [])
   return (
     <>
       <Provider store={store}>
@@ -47,9 +53,9 @@ export default function Home() {
         <Header />
         <About />
         <Experience />
-        {/* <Project /> */}
-        {/* <Contact /> */}
-        {/* <Footer /> */}
+        <Project />
+        <Contact />
+        <Footer />
       </Provider>
     </>
   )

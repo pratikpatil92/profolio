@@ -47,6 +47,9 @@
   .about-img{
     width: 60%;
   }
+  .about-img img{
+    height: 400px;
+  }
   .about-description{
       width: 100%;
   }
@@ -60,6 +63,12 @@
   .mycontainer {
     max-width: 475px;
   }
+  .about-img{
+    display: none;
+  }
+  .about-content{
+      margin-top: 2rem;
+  }
   
 }
 
@@ -68,9 +77,23 @@
   .mycontainer {
     width: 100%;
   }
+  .about-section{
+  margin-top: 20%;
+}
   .about-description{
       width: 70%;
   }
-  
+  .about-content{
+      margin-top: 2rem;
+  }
+  .about-img{
+      display: none;
+  }
+  .about-description{
+      text-align: center;
+  }
+  .experience-container{
+  margin-top: 20%;
+}
 }
 

@@ -13,21 +13,21 @@ function Project() {
                 <div className="mycontainer project-section">
                     <p className="section__text__p1">Browse my recent</p>
                     <h1 className="title">Projects</h1>
-                    <p><b>Important Note:</b> Please be aware that I have worked on several projects for my current company, which are confidential and cannot be shared on this public portfolio website.
-                    </p>
+
                     <div className="project-container">
                         {projectData?.map((ele, index) => {
                             const { attributes } = ele
                             return (
                                 <div key={index} className="project-card">
                                     <h2>{attributes.name}</h2>
-                                    <ul>
+                                    {/* <ul>
                                         {attributes._description.map((de, id) => (
                                             <li key={id}>
                                                 {de}
                                             </li>
                                         ))}
-                                    </ul>
+                                    </ul> */}
+                                    <p>{attributes?.description}</p>
                                     <h4>Technologies:</h4>
                                     <div>
                                         {attributes?._technologies?.map((tech, idt) => (
@@ -39,6 +39,7 @@ function Project() {
                         })}
 
                     </div>
+
                 </div>
             </section>
         </Element>

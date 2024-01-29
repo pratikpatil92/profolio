@@ -337,7 +337,11 @@ a:hover{
 .project-card h4{
   margin-top: 1rem ;
   margin-bottom: .5rem ;
-}       
+}    
+
+.project-card ul {
+  margin-left: 1rem;
+}
 
 /* Section contact */
 #contact{

@@ -44,7 +44,7 @@ function Experience() {
                                         </p>
                                         <p className="text-sm font-bold">Technologies:</p>
                                         <div >
-                                            {attributes?.technologies.map((ele, index) => (
+                                            {attributes?.technologies?.map((ele, index) => (
                                                 <Chip style={{ marginLeft: ".5rem", marginBottom: ".5rem" }} key={index} label={ele} />
                                             ))}
                                         </div>
